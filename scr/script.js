@@ -208,7 +208,7 @@ L.Control.CustomButtons = L.Control.Layers.extend({
 new L.Control.CustomButtons(null, overlayMaps, { collapsed: false }).addTo(map);
 
 //GeoJson test
-var geojsonFeature =
+/*var geojsonFeature =
 {
     "type": "FeatureCollection",
     "features": [
@@ -298,3 +298,71 @@ L.geoJSON(geojsonFeature, {
         return L.circleMarker(latlng, geojsonMarkerOptions);
     }
 }).addTo(map);
+
+*/
+
+
+
+//Test https://exchangetuts.com/leaflet-update-geojson-filter-1639827088020617
+var data =[
+    {
+     type: "Feature",
+     properties: {
+        type: "type1"
+     },
+     geometry: {
+        type: "Point",
+        coordinates: [-1.252,52.107]
+     }
+    },
+    {
+     type: "Feature",
+     properties: {
+        type: "type2"
+     },
+     geometry: {
+        type: "Point",
+        coordinates: [-2.252,54.107]
+     }
+    }
+  ];
+
+  //array to store layers for each feature type
+var mapLayerGroups = [];
+
+//draw GEOJSON - don't add the GEOJSON layer to the map here
+L.geoJson(data, {onEachFeature: onEachFeature})//.addTo(map);
+
+/*
+ *for all features create a layerGroup for each feature type and add the feature to the    layerGroup
+*/
+function onEachFeature(feature, featureLayer) {
+
+    //does layerGroup already exist? if not create it and add to map
+    var lg = mapLayerGroups[feature.properties.type];
+
+    if (lg === undefined) {
+        lg = new L.layerGroup();
+        //add the layer to the map
+        lg.addTo(map);
+        //store layer
+        mapLayerGroups[feature.properties.type] = lg;
+    }
+
+    //add the feature to the layer
+    lg.addLayer(featureLayer);      
+}
+//Show layerGroup with feature of "type1"
+showLayer("type1");
+
+/*
+* show/hide layerGroup   
+*/
+function showLayer(id) {
+    var lg = mapLayerGroups[id];
+    map.addLayer(lg);   
+}
+function hideLayer(id) {
+    var lg = mapLayerGroups[id];
+    map.removeLayer(lg);   
+}
