@@ -239,7 +239,14 @@ var dataGeoJson = {
 var Rottenburg = L.layerGroup().addTo(map);
 var Dresden = L.layerGroup().addTo(map);
 
+function onEachFeature(feature, layer) {
+    layer.on('click', function () {
+            sidebar.toggle();
+        });
+}
+
 var Rottenburg = L.geoJson(dataGeoJson, {
+    onEachFeature: onEachFeature,
     pointToLayer: function (feature, latlng) {
 
         return L.circleMarker(latlng, {
@@ -258,6 +265,7 @@ var Rottenburg = L.geoJson(dataGeoJson, {
 }).addTo(map)
 
 var Dresden = L.geoJson(dataGeoJson, {
+    onEachFeature: onEachFeature,
     pointToLayer: function (feature, latlng) {
 
         return L.circleMarker(latlng, {
