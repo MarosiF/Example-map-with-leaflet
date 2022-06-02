@@ -247,7 +247,7 @@ function onEachFeature(feature, layer) {
 }
 
 var Rottenburg = L.geoJson(dataGeoJson, {
-    onEachFeature: onEachFeature,
+    //onEachFeature: onEachFeature,
     pointToLayer: function (feature, latlng) {
 
         return L.circleMarker(latlng, {
@@ -259,6 +259,9 @@ var Rottenburg = L.geoJson(dataGeoJson, {
 
         }).bindTooltip(feature.properties.name);
     },
+    onEachFeature: function (feature, layer) {
+        layer.bindPopup(feature.properties.name).openPopup();
+    },
 
     filter: function (feature, layer) {
         return (feature.properties.scan === "Rottenburg");
@@ -266,7 +269,7 @@ var Rottenburg = L.geoJson(dataGeoJson, {
 }).addTo(map)
 
 var Dresden = L.geoJson(dataGeoJson, {
-    onEachFeature: onEachFeature,
+    //onEachFeature: onEachFeature,
     pointToLayer: function (feature, latlng) {
 
         return L.circleMarker(latlng, {
@@ -278,7 +281,9 @@ var Dresden = L.geoJson(dataGeoJson, {
 
         }).bindTooltip(feature.properties.name);
     },
-
+    onEachFeature: function (feature, layer) {
+        layer.bindPopup(feature.properties.name).openPopup();
+    },
     filter: function (feature, layer) {
         return (feature.properties.scan === "Dresden");
     }
