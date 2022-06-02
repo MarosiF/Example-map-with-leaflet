@@ -2,6 +2,58 @@
  * Map test
  */
 
+//Data
+var dataGeoJson = {
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Test 1",
+                "scan": "Rottenburg",
+                "description":" "
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    8.701171874999998,
+                    49.468124067331644
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Test 2",
+                "scan": "Rottenburg",
+                "description":" "
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.458984375,
+                    50.819818262156545
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Test 3",
+                "scan": "Dresden",
+                "description":" "
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    8.1298828125,
+                    51.83577752045248
+                ]
+            }
+        }
+    ]
+}
+
 // config map
 let config = {
     minZoom: 4
@@ -185,57 +237,6 @@ L.Control.CustomButtons = L.Control.Layers.extend({
 });
 
 
-
-var dataGeoJson = {
-    "type": "FeatureCollection",
-    "features": [
-        {
-            "type": "Feature",
-            "properties": {
-                "name": "Test 1",
-                "scan": "Rottenburg"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    8.701171874999998,
-                    49.468124067331644
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "name": "Test 2",
-                "scan": "Rottenburg"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    10.458984375,
-                    50.819818262156545
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "name": "Test 3",
-                "scan": "Dresden"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    8.1298828125,
-                    51.83577752045248
-                ]
-            }
-        }
-    ]
-}
-
-
-
 var Rottenburg = L.layerGroup().addTo(map);
 var Dresden = L.layerGroup().addTo(map);
 
@@ -273,7 +274,7 @@ var Dresden = L.geoJson(dataGeoJson, {
             opacity: .5,
             color: "#FF19D9",
             fillColor: "#FFFFFF",
-            fillOpacity: 0.2
+            fillOpacity: 0.8
 
         }).bindTooltip(feature.properties.name);
     },
